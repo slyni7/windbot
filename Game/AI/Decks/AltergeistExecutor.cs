@@ -196,9 +196,9 @@ namespace WindBot.Game.AI.Decks
         public bool has_altergeist_left()
         {
             return (Bot.GetRemainingCount(CardId.Marionetter, 3) > 0
-                || Bot.GetRemainingCount(CardId.Multifaker, 2) > 0
+                || Bot.GetRemainingCount(CardId.Multifaker, 1) > 0
                 || Bot.GetRemainingCount(CardId.Meluseek,3) > 0
-                || Bot.GetRemainingCount(CardId.Silquitous,2) > 0
+                || Bot.GetRemainingCount(CardId.Silquitous,3) > 0
                 || Bot.GetRemainingCount(CardId.Kunquery,1) > 0);
         }
 
@@ -1269,7 +1269,7 @@ namespace WindBot.Game.AI.Decks
                 AI.SelectCard(CardId.Marionetter);
                 return true;
             }
-            if (!Bot.HasInHandOrHasInMonstersZone(CardId.Multifaker) && Bot.GetRemainingCount(CardId.Multifaker, 2) > 0 && Multifaker_can_ss())
+            if (!Bot.HasInHandOrHasInMonstersZone(CardId.Multifaker) && Bot.GetRemainingCount(CardId.Multifaker, 1) > 0 && Multifaker_can_ss())
             {
                 AI.SelectCard(CardId.Multifaker);
                 return true;
@@ -1336,7 +1336,7 @@ namespace WindBot.Game.AI.Decks
             {
                 if (Duel.Player == 1)
                 {
-                    if (!Bot.HasInHandOrHasInMonstersZone(CardId.Multifaker) && Bot.GetRemainingCount(CardId.Multifaker, 2) > 0 && Multifaker_candeckss() && Multifaker_can_ss())
+                    if (!Bot.HasInHandOrHasInMonstersZone(CardId.Multifaker) && Bot.GetRemainingCount(CardId.Multifaker, 1) > 0 && Multifaker_candeckss() && Multifaker_can_ss())
                     {
                         foreach(ClientCard set_card in Bot.GetSpells())
                         {
@@ -1360,7 +1360,7 @@ namespace WindBot.Game.AI.Decks
                         AI.SelectCard(CardId.Marionetter);
                         return true;
                     }
-                    if (!Bot.HasInHandOrHasInMonstersZone(CardId.Multifaker) && Bot.GetRemainingCount(CardId.Multifaker, 2) > 0 && Multifaker_can_ss())
+                    if (!Bot.HasInHandOrHasInMonstersZone(CardId.Multifaker) && Bot.GetRemainingCount(CardId.Multifaker, 1) > 0 && Multifaker_can_ss())
                     {
                         AI.SelectCard(CardId.Multifaker);
                         return true;
@@ -1401,7 +1401,7 @@ namespace WindBot.Game.AI.Decks
                     Multifaker_ssfromdeck = true;
                     return true;
                 }
-                else if (!Silquitous_bounced && !Bot.HasInMonstersZone(CardId.Silquitous) && Bot.GetRemainingCount(CardId.Silquitous,2) > 0
+                else if (!Silquitous_bounced && !Bot.HasInMonstersZone(CardId.Silquitous) && Bot.GetRemainingCount(CardId.Silquitous,3) > 0
                     && !(Duel.Player == 0 && Silquitous_target==null))
                 {
                     AI.SelectCard(CardId.Silquitous);
@@ -1613,7 +1613,7 @@ namespace WindBot.Game.AI.Decks
 
                 if (Multifaker_candeckss() && Bot.HasInGraveyard(CardId.Multifaker) && has_altergeist_left())
                 {
-                    if (Bot.HasInHand(CardId.Multifaker) && Bot.HasInGraveyard(CardId.Silquitous) && Bot.GetRemainingCount(CardId.Silquitous,2) == 0)
+                    if (Bot.HasInHand(CardId.Multifaker) && Bot.HasInGraveyard(CardId.Silquitous) && Bot.GetRemainingCount(CardId.Silquitous,3) == 0)
                     {
                         AI.SelectCard(CardId.Silquitous);
                         return true;
@@ -2392,7 +2392,7 @@ namespace WindBot.Game.AI.Decks
                     if (GetTotalATK(targets) >= 1500 && (summoned || (!Meluseek_selected && !Hexstia_selected))) return false;
                 }
                 bool can_have_Multifaker = (Bot.HasInHand(CardId.Multifaker) 
-                    || (Bot.GetRemainingCount(CardId.Multifaker, 2) > 0 
+                    || (Bot.GetRemainingCount(CardId.Multifaker, 1) > 0 
                         && ( (Meluseek_selected && !Meluseek_searched) 
                             || (Hexstia_selected && !Hexstia_searched) )));
                 if (can_have_Multifaker && Multifaker_can_ss()) altergeist_count++;
