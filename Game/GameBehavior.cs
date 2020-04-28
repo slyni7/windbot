@@ -110,6 +110,7 @@ namespace WindBot.Game
             _packets.Add(StocMessage.Chat, OnChat);
             _packets.Add(StocMessage.ChangeSide, OnChangeSide);
             _packets.Add(StocMessage.ErrorMsg, OnErrorMsg);
+            _packets.Add(StocMessage.Rematch, OnRematch);
 
             _messages.Add(GameMessage.Retry, OnRetry);
             _messages.Add(GameMessage.Start, OnStart);
@@ -231,11 +232,16 @@ namespace WindBot.Game
             _ai.OnJoinGame();
         }
 
+        private void OnRematch(BinaryReader packet)
+        {
+            Connection.Send(CtosMessage.RematchResponse, (byte)(1));
+        }
+
         private void OnTypeChange(BinaryReader packet)
         {
             int type = packet.ReadByte();
             int pos = type & 0xF;
-            if (pos < 0 || pos > 3)
+            if (pos < 0 || pos >= _room.Players)
             {
                 Connection.Close();
                 return;
@@ -259,7 +265,7 @@ namespace WindBot.Game
             int change = packet.ReadByte();
             int pos = (change >> 4) & 0xF;
             int state = change & 0xF;
-            if (pos > 3)
+            if (pos >= _room.Players)
                 return;
             if (state < 8)
             {
