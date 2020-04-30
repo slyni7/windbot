@@ -79,6 +79,10 @@ namespace WindBot.Game.AI.Decks
             AddExecutor(ExecutorType.Activate, CardId.SevensRoad, SevensRoadEff);
             AddExecutor(ExecutorType.Activate, CardId.FireGolem, FireGolemEff); // after sroad for atk manip
             AddExecutor(ExecutorType.Activate, CardId.WindcasterTorna, WindTornaEff);
+
+            // trap cards
+            AddExecutor(ExecutorType.Activate, CardId.DarkLiberation, DarkLibEff);
+            AddExecutor(ExecutorType.Activate, CardId.CurtainSparks, CurSparksEff);
         }
 
         public override bool OnSelectHand()
@@ -291,5 +295,27 @@ namespace WindBot.Game.AI.Decks
             return false;
         }
 
+        private bool DarkLibEff()
+        {
+            IList<ClientCard> okToShuffle = Bot.Graveyard.GetMatchingCards(c => !IsUniqueAttribute(c));
+            List<ClientCard> selections = new List<ClientCard>();
+            while (okToShuffle.Count > 0 && selections.Count < 4)
+            {
+                ClientCard sel = okToShuffle[0];
+                selections.Add(sel);
+                okToShuffle.Remove(sel);
+                IList<ClientCard> maybeRemove = okToShuffle.GetMatchingCards(c => c.HasAttribute((CardAttribute)sel.Attribute));
+                if (maybeRemove.Count == 1)
+                    okToShuffle.Remove(maybeRemove[0]); // if exactly 1 left with attribute, no longer OK to shuffle
+            }
+
+            AI.SelectCard(selections);
+            return true;
+        }
+
+        private bool CurSparksEff()
+        {
+            return true;
+        }
     }
 }
