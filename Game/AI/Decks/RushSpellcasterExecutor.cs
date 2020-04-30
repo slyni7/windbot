@@ -11,26 +11,26 @@ namespace WindBot.Game.AI.Decks
     {
         public class CardId
         {
-            public const int DarkSorceror = 1;
-            public const int Wolfram = 1;
-            public const int StrayCat = 1;
-            public const int FireGolem = 1;
-            public const int MysticDealer = 1;
-            public const int WhisperingFairy = 1;
-            public const int DefensiveDragonMage = 1;
-            public const int LuminousShaman = 1;
+            public const int DarkSorceror = 160301005;
+            public const int Wolfram = 160301007;
+            public const int StrayCat = 160301010;
+            public const int FireGolem = 160001005;
+            public const int MysticDealer = 160301006;
+            public const int WhisperingFairy = 160001018;
+            public const int DefensiveDragonMage = 160001031;
+            public const int LuminousShaman = 160301009;
 
-            public const int SevensRoad = 1;
-            public const int WindcasterTorna = 1;
-            public const int RoadWitch = 1;
+            public const int SevensRoad = 160301001;
+            public const int WindcasterTorna = 160301002;
+            public const int RoadWitch = 160401001;
 
-            public const int RecoveryForce = 1;
-            public const int HammerCrush = 1;
-            public const int WindBlessing = 1;
-            public const int MagicalStream = 1;
+            public const int RecoveryForce = 160001038;
+            public const int HammerCrush = 160301041;
+            public const int WindBlessing = 160301011;
+            public const int MagicalStream = 160301012;
 
-            public const int DarkLiberation = 1;
-            public const int CurtainSparks = 1;
+            public const int DarkLiberation = 160301013;
+            public const int CurtainSparks = 160301014;
         }
 
         public RushSpellcasterExecutor(GameAI ai, Duel duel)
