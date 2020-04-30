@@ -37,14 +37,6 @@ namespace WindBot.Game.AI.Decks
             : base(ai, duel)
         {
             // summon weenies
-            AddExecutor(ExecutorType.MonsterSet, CardId.MysticDealer, NormalSet);
-            AddExecutor(ExecutorType.MonsterSet, CardId.FireGolem, NormalSet);
-            AddExecutor(ExecutorType.MonsterSet, CardId.WhisperingFairy, NormalSet);
-            AddExecutor(ExecutorType.MonsterSet, CardId.DefensiveDragonMage, NormalSet);
-            AddExecutor(ExecutorType.MonsterSet, CardId.LuminousShaman, NormalSet);
-            AddExecutor(ExecutorType.MonsterSet, CardId.DarkSorceror, NormalSet);
-            AddExecutor(ExecutorType.MonsterSet, CardId.Wolfram, NormalSet);
-
             AddExecutor(ExecutorType.Summon, CardId.MysticDealer, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.FireGolem, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.WhisperingFairy, NormalSummon);
@@ -53,6 +45,14 @@ namespace WindBot.Game.AI.Decks
             AddExecutor(ExecutorType.Summon, CardId.DarkSorceror, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.Wolfram, NormalSummon);
             AddExecutor(ExecutorType.MonsterSet, CardId.StrayCat, NormalSummon);
+
+            AddExecutor(ExecutorType.MonsterSet, CardId.MysticDealer, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.FireGolem, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.WhisperingFairy, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.DefensiveDragonMage, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.LuminousShaman, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.DarkSorceror, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.Wolfram, NormalSet);
 
             AddExecutor(ExecutorType.Activate, CardId.MysticDealer, GenericDiscard); // use before being tributed
 
@@ -109,8 +109,8 @@ namespace WindBot.Game.AI.Decks
 
         private bool NormalSet()
         {
-            // only set if we need to cower
-            if (Enemy.MonsterZone.IsExistingMatchingCard(c => c.Attack < Card.Attack))
+            // only set if we need to cower from every enemy
+            if (Enemy.GetMonsterCount() > 0 && !Enemy.MonsterZone.IsExistingMatchingCard(c => c.Attack < Card.Attack))
             {
                 return false;
             }
