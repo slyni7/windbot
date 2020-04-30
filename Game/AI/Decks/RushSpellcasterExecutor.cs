@@ -52,8 +52,7 @@ namespace WindBot.Game.AI.Decks
             AddExecutor(ExecutorType.Summon, CardId.LuminousShaman, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.DarkSorceror, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.Wolfram, NormalSummon);
-
-            AddExecutor(ExecutorType.MonsterSet, CardId.StrayCat, StrayCatSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.StrayCat, NormalSummon);
 
             AddExecutor(ExecutorType.Activate, CardId.MysticDealer, GenericDiscard); // use before being tributed
 
