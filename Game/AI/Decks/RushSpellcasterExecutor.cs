@@ -14,7 +14,7 @@ namespace WindBot.Game.AI.Decks
             public const int DarkSorceror = 160301005;
             public const int Wolfram = 160301007;
             public const int StrayCat = 160301010;
-            public const int FireGolem = 160001005;
+            public const int FireGolem = 160001019;
             public const int MysticDealer = 160301006;
             public const int WhisperingFairy = 160001018;
             public const int DefensiveDragonMage = 160001031;
@@ -25,7 +25,7 @@ namespace WindBot.Game.AI.Decks
             public const int RoadWitch = 160401001;
 
             public const int RecoveryForce = 160001038;
-            public const int HammerCrush = 160301041;
+            public const int HammerCrush = 160001041;
             public const int WindBlessing = 160301011;
             public const int MagicalStream = 160301012;
 
