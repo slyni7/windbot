@@ -37,6 +37,14 @@ namespace WindBot.Game.AI.Decks
             : base(ai, duel)
         {
             // summon weenies
+            AddExecutor(ExecutorType.MonsterSet, CardId.MysticDealer, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.FireGolem, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.WhisperingFairy, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.DefensiveDragonMage, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.LuminousShaman, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.DarkSorceror, NormalSet);
+            AddExecutor(ExecutorType.MonsterSet, CardId.Wolfram, NormalSet);
+
             AddExecutor(ExecutorType.Summon, CardId.MysticDealer, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.FireGolem, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.WhisperingFairy, NormalSummon);
@@ -44,7 +52,8 @@ namespace WindBot.Game.AI.Decks
             AddExecutor(ExecutorType.Summon, CardId.LuminousShaman, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.DarkSorceror, NormalSummon);
             AddExecutor(ExecutorType.Summon, CardId.Wolfram, NormalSummon);
-            AddExecutor(ExecutorType.MonsterSet, CardId.StrayCat, NormalSummon);
+
+            AddExecutor(ExecutorType.MonsterSet, CardId.StrayCat, StrayCatSet);
 
             AddExecutor(ExecutorType.Activate, CardId.MysticDealer, GenericDiscard); // use before being tributed
 
@@ -99,6 +108,17 @@ namespace WindBot.Game.AI.Decks
             return includeMzone ? (uniqueInGY && !Bot.MonsterZone.IsExistingMatchingCard(c => c.HasAttribute(att))) : uniqueInGY;
         }
 
+        private bool NormalSet()
+        {
+            // only set if we need to cower
+            if (Enemy.MonsterZone.IsExistingMatchingCard(c => c.Attack < Card.Attack))
+            {
+                return false;
+            }
+            // summon monsters with new attributes first
+            return IsUniqueAttribute(Card, true) || !Bot.Hand.IsExistingMatchingCard(c => IsUniqueAttribute(c, true));
+        }
+
         private bool NormalSummon()
         {
             // summon monsters with new attributes first
@@ -138,7 +158,12 @@ namespace WindBot.Game.AI.Decks
             if (discards.Count < 1)
                 return false;
 
-            AI.SelectMaterials(discards.GetLowestAttackMonster());
+            IList<ClientCard> uniques = discards.GetMatchingCards(c => IsUniqueAttribute(c));
+            if (uniques.Count > 0)
+                AI.SelectCard(uniques);
+            else
+                AI.SelectCard(discards);
+
             return true;
         }
 
@@ -148,11 +173,12 @@ namespace WindBot.Game.AI.Decks
             if (discards.Count < 2)
                 return false;
 
-            ClientCard firstMat = discards.GetLowestAttackMonster();
-            discards.Remove(firstMat);
-            ClientCard nextMat = discards.GetLowestAttackMonster();
-            ClientCard[] mats = { firstMat, nextMat };
-            AI.SelectMaterials(mats);
+            IList<ClientCard> uniques = discards.GetMatchingCards(c => IsUniqueAttribute(c));
+            if (uniques.Count > 1)
+                AI.SelectCard(uniques);
+            else
+                AI.SelectCard(discards);
+
             return true;
         }
 
