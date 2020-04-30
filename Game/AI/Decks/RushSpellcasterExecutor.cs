@@ -243,7 +243,7 @@ namespace WindBot.Game.AI.Decks
         {
             ClientCard attacker = Bot.MonsterZone.GetMatchingCards(c => c.Level <= 4 && IsSpellcaster(c)).GetHighestAttackMonster();
             ClientCard target = Util.GetWorstEnemyMonster(true);
-            return (attacker.Attack - target.Attack) > Card.Attack;
+            return !(attacker == null) && !(target == null) && (attacker.Attack - target.Attack) > Card.Attack;
         }
 
         private bool SevensRoadEff()
