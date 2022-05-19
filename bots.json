@@ -24,6 +24,12 @@
         "masterRules": [ 3, 4, 5 ]
     },
     {
+        "name": "Brave",
+        "deck": "Brave",
+        "difficulty": 3,
+        "masterRules": [ 5 ]
+    },
+    {
         "name": "Burn",
         "deck": "Burn",
         "difficulty": 0,
@@ -166,6 +172,12 @@
         "deck": "SkyStriker",
         "difficulty": 3,
         "masterRules": [ 4, 5 ]
+    },
+    {
+        "name": "Splight",
+        "deck": "Splight",
+        "difficulty": 3,
+        "masterRules": [ 5 ]
     },
     {
         "name": "Swordsoul",

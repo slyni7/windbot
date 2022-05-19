@@ -198,6 +198,15 @@ namespace WindBot.Game
             return SpellZone[5];
         }
 
+        public bool HasInDeck(int cardId)
+        {
+            return HasInCards(Deck, cardId);
+        }
+
+        public bool HasInDeck(IList<int> cardId)
+        {
+            return HasInCards(Deck, cardId);
+        }
         public bool HasInHand(int cardId)
         {
             return HasInCards(Hand, cardId);
@@ -316,6 +325,11 @@ namespace WindBot.Game
         public bool HasInHandOrInGraveyard(IList<int> cardId)
         {
             return HasInHand(cardId) || HasInGraveyard(cardId);
+        }
+
+        public bool HasInGraveyardOrInBanished(int cardId)
+        {
+            return HasInBanished(cardId) || HasInGraveyard(cardId);
         }
 
         public bool HasInMonstersZoneOrInGraveyard(IList<int> cardId)

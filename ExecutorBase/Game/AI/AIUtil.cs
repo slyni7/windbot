@@ -213,8 +213,8 @@ namespace WindBot.Game.AI
             if (card != null)
                 return card;
 
-            if (spells.Count > 0 && !onlyFaceup)
-                return spells[0];
+            /*if (spells.Count > 0 && !onlyFaceup)
+                return spells[0];*/
 
             return null;
         }
