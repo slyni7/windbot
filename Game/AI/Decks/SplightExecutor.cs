@@ -105,7 +105,12 @@ namespace WindBot.Game.AI.Decks
             AddExecutor(ExecutorType.Activate, OtherMonsterEffect);*/
         }
 
-        
+
+        public override bool OnSelectHand()
+        {
+            // go first
+            return true;
+        }
 
         private bool NormalSummoned = false;
         private bool SplightElfActivated = false;
@@ -249,7 +254,7 @@ namespace WindBot.Game.AI.Decks
         {
             SelectXYZDetach(Card.Overlays);
             return !Duel.CurrentChain.Any(card => card.Controller == 0 && card.IsCode(CardId.NegologiaAAZeus))
-                && (Bot.GetMonsterCount() + Bot.GetSpellCount() + 1 <= Enemy.GetMonsterCount() + Enemy.GetSpellCount());
+                && (Bot.GetMonsterCount() + Bot.GetSpellCount() <= Enemy.GetMonsterCount() + Enemy.GetSpellCount());
         }
 
         private bool CrossoutDesignatorEffect()
